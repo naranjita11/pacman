@@ -214,7 +214,14 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(stopFlashing, 10000);
     };
 
-    //make the ghosts stop flashing
+    function eatGhost (index) {
+        updateScore(200);
+        const dyingGhost = ghosts.find(ghost => ghost.currentIndex === index);
+        console.log('pacman eats dyingGhost', dyingGhost);
+        stopMoving(dyingGhost);
+        dyingGhost.currentIndex = null;
+        arrayOfEls[index].classList.replace('blue-ghost', 'pac-dot');
+    }
 
 
     //check for a game over
