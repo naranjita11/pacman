@@ -102,6 +102,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             } else if (boardLayout[newIndex] === 3) {
                 eatPowerPellet(newIndex);
+            } else if (arrayOfEls[newIndex].classList.contains('inky' || 'blinky' || 'clyde' || 'pinky')) {
+                alert('Pacman hits ghost  - Game Over!');
+                ghosts.forEach(ghost => stopMoving(ghost));
+                return;
+            } else if (arrayOfEls[newIndex].classList.contains('blue-ghost')) {
+                eatGhost(newIndex);
             }
             let originalIndex = pacmanCurrentIndex;
             pacmanCurrentIndex = newIndex;
@@ -134,7 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const drawGhost = (ghost) => {
         const location = arrayOfEls[ghost.currentIndex];
-        location.classList.add('ghost', ghost.className);
+        if (ghost.blueMode) {
+            location.classList.add('blue-ghost');
+        } else {
+            location.classList.add('ghost', ghost.className);
+        }
     }
 
     // draw my ghosts onto the grid
@@ -149,20 +159,27 @@ document.addEventListener('DOMContentLoaded', () => {
             return directions[Math.floor(Math.random() * directions.length)]
         };
         
-        const attemptMove = () => {
+        function attemptMove() {
             let randomDirection = getRandomDirection();
             const newIndex = ghost.currentIndex + randomDirection;
 
-            if (newIndex) {
-                if (boardLayout[newIndex] === 1 || arrayOfEls[newIndex].classList.contains('ghost')) {
-                    return;
+            if (boardLayout[newIndex] === 1 || 
+                arrayOfEls[newIndex].classList.contains('ghost' || 'blue-ghost')) {
+                return;
+            } else if (arrayOfEls[newIndex].classList.contains('pac-man')) {
+                if (ghost.blueMode) {
+                    console.log('blueGhost hits pacman', ghost);
+                    eatGhost(ghost.currentIndex);
                 } else {
-                    let originalIndex = ghost.currentIndex;
-                    ghost.currentIndex = newIndex;
-                    drawGhost(ghost);
-                    let originalLocation = arrayOfEls[originalIndex];
-                    originalLocation.classList.remove('ghost', ghost.className);
-                } 
+                    alert('Ghost hits pacman - Game Over!');
+                    ghosts.forEach(ghost => stopMoving(ghost));
+                }
+            } else {
+                let originalIndex = ghost.currentIndex;
+                ghost.currentIndex = newIndex;
+                drawGhost(ghost);
+                let originalLocation = arrayOfEls[originalIndex];
+                originalLocation.classList.remove('ghost', ghost.className, 'blue-ghost');
             };
         }
 
@@ -191,10 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // ghosts turn to blue mode for 10 seconds
         ghosts.forEach(ghost => {ghost.blueMode = true});
-
-
-        // pacman can eat ghosts and get 200 points for each!
-    
+        const stopFlashing = () => {
+            ghosts.forEach(ghost => {ghost.blueMode = false});
+        }
+        setTimeout(stopFlashing, 10000);
     };
 
     //make the ghosts stop flashing
