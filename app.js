@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.currentIndex = startingIndex;
             this.speed = speed;
             this.blueMode = false;
+            this.intervalId;
         }
     }
     
@@ -164,10 +165,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 } 
             };
         }
-        attemptMove();
 
-        // setInterval(attemptMove, ghost.speed);
+        function startMoving() {
+            if (!ghost.intervalId) {
+                ghost.intervalId = setInterval(attemptMove, ghost.speed);
+            }
+        }
+
+        startMoving();
     };
+
+    function stopMoving(ghost) {
+        console.log('stopMoving:', ghost);
+        clearInterval(ghost.intervalId);
+        ghost.intervalId = null;
+    }
     
     //what happens when you eat a power-pellet
     function eatPowerPellet (index) {
