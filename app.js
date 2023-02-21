@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const scoreDisplay = document.getElementById('score')
     let score = 0
     scoreDisplay.innerHTML = score;
-    const updateScore = (points, ) => {
+    const updateScore = points => {
         score = score + points;
         scoreDisplay.innerHTML = score;
     };
