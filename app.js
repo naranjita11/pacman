@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (newIndex) {
             if (boardLayout[newIndex] === 1) {
                 return;
-            } else if (boardLayout[newIndex] === 3) {
+            } else if (arrayOfEls[newIndex].classList.contains('power-pellet')) {
                 eatPowerPellet(newIndex);
             } else if (arrayOfEls[newIndex].classList.contains('inky' || 'blinky' || 'clyde' || 'pinky')) {
                 alert('Pacman hits ghost  - Game Over!');
