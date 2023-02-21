@@ -72,11 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
         location.classList.add('pac-man');
     };
     
-    // get the coordinates of pacman on the grid with X and Y axis
-    // function getCoordinates(index) {
-    //   return [index % width + 1, Math.floor(index / width) + 1]
-    // }
-    
     const movePacman = (e) => {
         let newIndex;
         switch (e.code) {
@@ -210,18 +205,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function eatGhost (index) {
         updateScore(200);
         const dyingGhost = ghosts.find(ghost => ghost.currentIndex === index);
-        console.log('pacman eats dyingGhost', dyingGhost);
         stopMoving(dyingGhost);
+        console.log('pacman eats dyingGhost', dyingGhost);
         dyingGhost.currentIndex = null;
         arrayOfEls[index].classList.replace('blue-ghost', 'pac-dot');
     }
-
-
-    // check for a game over
-        // no more score updates
-
-  
-    // check for a win - more is when this score is reached
 
   })
   
