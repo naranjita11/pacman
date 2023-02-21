@@ -56,12 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     createBoard();
   
-    // draw pacman onto the board
+    // draw pacman onto the board in starting location
     let pacmanCurrentIndex = 146;
     let startingLocation = arrayOfEls[pacmanCurrentIndex];
     startingLocation.innerHTML = '';
+    drawPacman();
     
-    const drawPacman = () => {
+    function drawPacman () {
         let location = arrayOfEls[pacmanCurrentIndex];
         const dotInSquare = location.innerHTML === '.';
         if (dotInSquare) {
@@ -70,14 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }  
         location.classList.add('pac-man');
     };
-    drawPacman();
     
     // get the coordinates of pacman on the grid with X and Y axis
     // function getCoordinates(index) {
     //   return [index % width + 1, Math.floor(index / width) + 1]
     // }
     
-    // move pacman
     const movePacman = (e) => {
         let newIndex;
         switch (e.code) {
@@ -118,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     document.addEventListener('keyup', movePacman);  
     
-    // create ghosts using a Ghost class
     class Ghost {
         constructor(className, startingIndex, speed) {
             this.className = className;
@@ -130,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // the ghosts
+    // instantiate the ghosts
     const ghosts = [
         new Ghost('blinky', 70, 200),
         new Ghost('pinky', 96, 300),
@@ -150,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // draw my ghosts onto the grid
     ghosts.forEach((ghost) => drawGhost(ghost));
     
-    // move the Ghosts randomly
+    // start the ghosts moving randomly
     ghosts.forEach(ghost => moveGhost(ghost));
 
     function moveGhost(ghost) {
@@ -198,15 +196,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ghost.intervalId = null;
     }
     
-    //what happens when you eat a power-pellet
     function eatPowerPellet (index) {
-        // 50 points added to score for eating pellet
         updateScore(50);
-
-        // power pellet disappears
         arrayOfEls[index].classList.replace('power-pellet', 'pac-dot');
 
-        // ghosts turn to blue mode for 10 seconds
         ghosts.forEach(ghost => {ghost.blueMode = true});
         const stopFlashing = () => {
             ghosts.forEach(ghost => {ghost.blueMode = false});
@@ -224,10 +217,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    //check for a game over
+    // check for a game over
+        // no more score updates
 
   
-    //check for a win - more is when this score is reached
+    // check for a win - more is when this score is reached
 
   })
   
