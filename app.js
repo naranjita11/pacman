@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 newIndex = pacmanCurrentIndex + width;
                 break;
             default:
-                console.log(`This key doesn't do anything!`);
+                return;
                 break;
         }
         if (newIndex) {
@@ -161,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             } else if (arrayOfEls[newIndex].classList.contains('pac-man')) {
                 if (ghost.blueMode) {
-                    console.log('blueGhost hits pacman', ghost);
                     eatGhost(ghost.currentIndex);
                 } else {
                     alert('Ghost hits pacman - Game Over!');
@@ -186,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function stopMoving(ghost) {
-        console.log('stopMoving:', ghost);
         clearInterval(ghost.intervalId);
         ghost.intervalId = null;
     }
@@ -206,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateScore(200);
         const dyingGhost = ghosts.find(ghost => ghost.currentIndex === index);
         stopMoving(dyingGhost);
-        console.log('pacman eats dyingGhost', dyingGhost);
         dyingGhost.currentIndex = null;
         arrayOfEls[index].classList.replace('blue-ghost', 'pac-dot');
         checkForWin();
