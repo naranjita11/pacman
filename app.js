@@ -48,9 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 arrayOfEls[i].classList.add('ghost-lair');
             } else if (boardLayout[i] === 3) {
                 arrayOfEls[i].classList.add('power-pellet');
-            } else if (boardLayout[i] === 4) {
-                arrayOfEls[i].classList.add('empty');
-            } 
+            }
         }
     }
     createBoard();
