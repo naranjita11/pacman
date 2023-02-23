@@ -41,18 +41,22 @@
 
 .blinky {
     background-color: red;
+    color: red;
 }
 
 .pinky {
     background-color: pink;
+    color: pink
 }
 
 .inky {
     background-color: navy;
+    color: navy;
 }
 
 .clyde {
-    background-color: orange; 
+    background-color: orange;
+    color: orange;
 }
 
 .pac-man {
@@ -63,4 +67,5 @@
 
 .blue-ghost {
     background-color: aquamarine;
+    color: aquamarine;
 }
