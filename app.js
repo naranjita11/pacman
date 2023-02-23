@@ -152,8 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
         function attemptMove() {
             let randomDirection = getRandomDirection();
             const newIndex = ghost.currentIndex + randomDirection;
-
-            if (boardLayout[newIndex] === 1 || 
+            
+            // once ghost has left ghost lair they can't move back there
+            if (ghost.currentIndex === 58 && newIndex === 71) {
+                return;
+            } else if (boardLayout[newIndex] === 1 || 
                 arrayOfEls[newIndex].classList.contains('ghost' || 'blue-ghost')) {
                 return;
             } else if (arrayOfEls[newIndex].classList.contains('pac-man')) {
