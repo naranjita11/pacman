@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (arrayOfEls[newIndex].classList.contains('power-pellet')) {
                 eatPowerPellet(newIndex);
             } else if (arrayOfEls[newIndex].classList.contains('inky' || 'blinky' || 'clyde' || 'pinky')) {
-                alert('Pacman hits ghost  - Game Over!');
+                alert('Pacman eats ghost  - Game Over!');
                 ghosts.forEach(ghost => stopMoving(ghost));
                 return;
             } else if (arrayOfEls[newIndex].classList.contains('blue-ghost')) {
@@ -144,13 +144,17 @@ document.addEventListener('DOMContentLoaded', () => {
     ghosts.forEach(ghost => moveGhost(ghost));
 
     function moveGhost(ghost) {
-        const directions = [1, -1, width, -width];
-        const getRandomDirection = () => {
-            return directions[Math.floor(Math.random() * directions.length)]
-        };
         
         function attemptMove() {
-            let randomDirection = getRandomDirection();
+            const directions = [1, -1, width, -width];
+            const limitedDirections = [1, -1, -width];
+            const getRandomDirection = (array) => {
+                return array[Math.floor(Math.random() * array.length)]
+            };
+
+            const ghostInLair = boardLayout[ghost.currentIndex] === 2;
+            const randomDirection =
+                ghostInLair ? getRandomDirection(limitedDirections) : getRandomDirection(directions);
             const newIndex = ghost.currentIndex + randomDirection;
             
             // once ghost has left ghost lair they can't move back there
@@ -163,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (ghost.blueMode) {
                     eatGhost(ghost.currentIndex);
                 } else {
-                    alert('Ghost hits pacman - Game Over!');
+                    alert('Ghost eats pacman - Game Over!');
                     ghosts.forEach(ghost => stopMoving(ghost));
                 }
             } else {
