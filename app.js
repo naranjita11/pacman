@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
         }
         if (newIndex) {
-            if (boardLayout[newIndex] === 1) {
+            if (boardLayout[newIndex] === 1 || boardLayout[newIndex] === 2) {
                 return;
             } else if (arrayOfEls[newIndex].classList.contains('power-pellet')) {
                 eatPowerPellet(newIndex);
