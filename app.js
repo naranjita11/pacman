@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1 - wall
     // 2 - ghost-lair
     // 3 - power-pellet
-    // 4 - empty
 
     const scoreDisplay = document.getElementById('score')
     let score = 0

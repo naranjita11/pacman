@@ -29,10 +29,6 @@
     border: 2px solid grey;
 }
 
-.empty {
-    background-color: green;
-}
-
 .power-pellet {
     background-color: orangered;
     border-radius: 50px;
