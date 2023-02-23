@@ -209,6 +209,14 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('pacman eats dyingGhost', dyingGhost);
         dyingGhost.currentIndex = null;
         arrayOfEls[index].classList.replace('blue-ghost', 'pac-dot');
+        checkForWin();
+    }
+
+    function checkForWin () {
+        const isDead = ghost => ghost.currentIndex === null;
+        if (ghosts.every(isDead)) {
+            alert(`Game over! You win with a score of ${score} points`);
+        } else return;
     }
 
   })
