@@ -152,15 +152,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 return array[Math.floor(Math.random() * array.length)]
             };
 
-            const ghostInLair = boardLayout[ghost.currentIndex] === 2;
+            // when ghost is in lair or entrance to lair, can only move out not back in
+            const ghostInOrNearLair = boardLayout[ghost.currentIndex] === 2 || ghost.currentIndex === 58;
             const randomDirection =
-                ghostInLair ? getRandomDirection(limitedDirections) : getRandomDirection(directions);
+                ghostInOrNearLair ? getRandomDirection(limitedDirections) : getRandomDirection(directions);
             const newIndex = ghost.currentIndex + randomDirection;
             
-            // once ghost has left ghost lair they can't move back there
-            if (ghost.currentIndex === 58 && newIndex === 71) {
-                return;
-            } else if (boardLayout[newIndex] === 1 || 
+            // 
+            if (boardLayout[newIndex] === 1 || 
                 arrayOfEls[newIndex].classList.contains('ghost' || 'blue-ghost')) {
                 return;
             } else if (arrayOfEls[newIndex].classList.contains('pac-man')) {
