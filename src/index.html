@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Pac-man</title>
+    <link rel="stylesheet" href="/style.css">
+    <script type="module" src="/index.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <main>
+      <div id="grid" class="grid"></div>
+      <section>
+        <h2>Score: <span id="score"></span></h2>
+        <form id="form">
+          <label for="username">Name:</label>
+          <input type="text" id="username" name="name" required
+          minlength="4" maxlength="8" size="10" />
+          <button id="submit" disabled>Submit score</button>
+        </form>
+        <section class="scoreTable">
+          <h3>Previous scores</h3>
+          <div class="tableContainer">
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    Player
+                  </th>
+                  <th>
+                    Score
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="tableData">
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html
